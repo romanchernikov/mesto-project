@@ -1,0 +1,10 @@
+.form {
+    display: none;
+    margin: 0 auto;
+    width: 430px;
+    height: 330px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: relative;
+}
