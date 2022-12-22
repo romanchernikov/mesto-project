@@ -1,0 +1,15 @@
+.popup__group {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    width: 358px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1179px) {
+    .popup__group {
+        width: 238px;
+    }
+}

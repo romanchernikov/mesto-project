@@ -8,3 +8,13 @@
     font-weight: 500;
     line-height: 48px;
 }
+
+@media screen and (max-width: 1179px) {
+    .profile__name {
+        grid-area: name;
+        width: 189px;
+        margin-left: 46px;
+        font-size: 27px;
+        line-height: 33px;
+    }
+}

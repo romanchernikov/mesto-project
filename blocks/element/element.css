@@ -9,3 +9,9 @@
     background-color: #fff;
     font-size: 0;
 }
+
+@media screen and (max-width: 1179px) {
+    .element {
+        justify-self: center;
+    }
+}

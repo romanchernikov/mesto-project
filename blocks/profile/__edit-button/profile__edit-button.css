@@ -8,3 +8,11 @@
     height: 24px;
     align-self: center;
 }
+
+@media screen and (max-width: 1179px) {
+    .profile__edit-button {
+        grid-area: edit;
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -5,14 +5,21 @@
     box-sizing: border-box;
     display: grid;
     color: #fff;
-    grid-area: "info";
+    grid-area: info;
     grid-template-columns: repeat(2, minmax(min-content, max-content));
     column-gap: 18px;
     row-gap: 16px;
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 1179px) {
     .profile__info {
+        margin-left: 0;
+        width: 282px;
+        grid-template-areas:
+            "name edit"
+            "hobby hobby";
         margin-top: 22.5px;
+        column-gap: 10px;
+        row-gap: 14px;
     }
 }

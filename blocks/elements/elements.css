@@ -11,7 +11,7 @@
     row-gap: 20px;
 }
 
-@media screen and (max-width: 1179) {
+@media screen and (max-width: 1179px) {
     .elements {
         width: 100%;
     }
