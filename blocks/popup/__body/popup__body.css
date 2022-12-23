@@ -1,16 +1,5 @@
 .popup__body {
     margin: 0;
     padding: 0;
-    width: 430px;
-    height: 330px;
-    background-color: #fff;
-    border-radius: 10px;
     position: relative;
-}
-
-@media screen and (max-width: 1179px) {
-    .popup__body {
-        width: 282px;
-        height: 322px;
-    }
 }

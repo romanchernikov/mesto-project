@@ -5,7 +5,8 @@
     width: 150px;
     height: 50px;
     border: 2px solid #fff;
-    background: #000 url(../../images/plus.svg) no-repeat center;
+    border-radius: 2px;
+    background: url(../../images/plus.svg) no-repeat center;
     grid-area: add;
     justify-self: end;
 }

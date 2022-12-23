@@ -3,11 +3,13 @@
     padding: 0;
     width: 142px;
     height: 33px;
-    background-image: url(../../../images/logo.svg);
+    background-image: url(../../../images/logo.svg) no-repeat center;
 }
 
 @media screen and (max-width: 1179px) {
     .header__logo {
+        width: 104px;
+        height: 24px;
         margin-left: 27px;
     }
 }
