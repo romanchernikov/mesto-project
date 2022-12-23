@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: #000 url(../../../images/pencil.svg) no-repeat center;
+    background: url(../../../images/pencil.svg) no-repeat center;
     border: 1px solid #fff;
     width: 24px;
     height: 24px;
