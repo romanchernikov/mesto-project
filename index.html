@@ -19,10 +19,11 @@
                 <img class="profile__avatar" src="./images/avatar.png" alt="Аватарка страницы">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
-                    <button class="profile__edit-button hover"></button>
+                    <button class="profile__edit-button hover" type="button"
+                        aria-label="Редактировать профиль"></button>
                     <p class="profile__hobby">Исследователь&nbsp;океана</p>
                 </div>
-                <button class="add-button hover"></button>
+                <button class="add-button hover" type="button" aria-label="Добавить контент"></button>
             </section>
             <section class="elements">
                 <article class="element">
@@ -30,35 +31,40 @@
                         class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Карачаевск</h2>
-                        <button class="element__raiting-icon hover"></button>
+                        <button class="element__raiting-icon hover" type="button"
+                            aria-label="Отметка Нравится"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/place-elbrus.png" alt="Фото горы Эльбрус" class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Гора&nbsp;Эльбрус</h2>
-                        <button class="element__raiting-icon hover"></button>
+                        <button class="element__raiting-icon hover" type="button"
+                            aria-label="Отметка Нравится"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/place-dombay.png" alt="Фото горы Домбай" class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Домбай</h2>
-                        <button class="element__raiting-icon hover"></button>
+                        <button class="element__raiting-icon hover" type="button"
+                            aria-label="Отметка Нравится"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/place-elbrus.png" alt="Фото горы Эльбрус" class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Гора&nbsp;Эльбрус</h2>
-                        <button class="element__raiting-icon hover"></button>
+                        <button class="element__raiting-icon hover" type="button"
+                            aria-label="Отметка Нравится"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img src="./images/place-dombay.png" alt="Фото горы Домбай" class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Домбай</h2>
-                        <button class="element__raiting-icon hover"></button>
+                        <button class="element__raiting-icon hover" type="button"
+                            aria-label="Отметка Нравится"></button>
                     </div>
                 </article>
                 <article class="element">
@@ -66,14 +72,16 @@
                         class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Карачаево Черкессия</h2>
-                        <button class="element__raiting-icon hover"></button>
+                        <button class="element__raiting-icon hover" type="button"
+                            aria-label="Отметка Нравится"></button>
                     </div>
                 </article>
             </section>
-            <section class="popup popup_opened">
+            <section class="popup">
                 <div class="popup__container">
                     <form class="popup__body" name="edit-form">
-                        <button class="popup__button-close hover"></button>
+                        <button class="popup__button-close hover" type="button"
+                            aria-label="Закрыть редактирование профиля"></button>
                         <div class="popup__group">
                             <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
                             <fieldset class="popup__input-container">
@@ -83,7 +91,7 @@
                                     value="Исследователь океана" name="edit-hobby">
                             </fieldset>
                             <fieldset class="popup__handlers">
-                                <button class="popup__button-submit">Сохранить</button>
+                                <button class="popup__button-submit" type="button">Сохранить</button>
                             </fieldset>
                         </div>
                     </form>
