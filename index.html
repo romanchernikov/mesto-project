@@ -26,16 +26,8 @@
                 <button class="add-button hover" type="button" aria-label="Добавить контент"></button>
             </section>
             <section class="elements">
-                <article class="element">
-                    <img src="./images/place-karachaevsk.png" alt="Фото Карачаево-Черкессия"
-                        class="element__user-image">
-                    <div class="element__title-box">
-                        <h2 class="element__image-title">Карачаевск</h2>
-                        <button class="element__raiting-icon hover" type="button"
-                            aria-label="Отметка Нравится"></button>
-                    </div>
-                </article>
-                <article class="element">
+
+                <!-- <article class="element">
                     <img src="./images/place-elbrus.png" alt="Фото горы Эльбрус" class="element__user-image">
                     <div class="element__title-box">
                         <h2 class="element__image-title">Гора&nbsp;Эльбрус</h2>
@@ -75,7 +67,7 @@
                         <button class="element__raiting-icon hover" type="button"
                             aria-label="Отметка Нравится"></button>
                     </div>
-                </article>
+                </article> -->
             </section>
             <section class="popup">
                 <div class="popup__container">
@@ -97,11 +89,41 @@
                     </form>
                 </div>
             </section>
+            <section>
+                <div class="popup__container">
+                    <form class="popup__body" name="edit-form">
+                        <button class="popup__button-close hover" type="button"
+                            aria-label="Закрыть добавление карточки"></button>
+                        <div class="popup__group">
+                            <h2 class="popup__heading">Новое&nbsp;место</h2>
+                            <fieldset class="popup__input-container">
+                                <input class="popup__item input__text_type_name-card" type="text" placeholder="Название"
+                                    name="edit-name-card">
+                                <input class="popup__item input__text_type_link-card" type="text"
+                                    placeholder="Ссылка на картинку" name="edit-link-card">
+                            </fieldset>
+                            <fieldset class="popup__handlers">
+                                <button class="popup__button-submit" type="submit">Сохранить</button>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
         </main>
         <footer class="footer">
             <p class="footer__copyright">&COPY;&nbsp;2022&nbsp;Mesto&nbsp;Russia</p>
         </footer>
     </div>
+    <template id="element__tamplate">
+        <article class="element">
+            <img src="" alt="" class="element__user-image">
+            <div class="element__title-box">
+                <h2 class="element__image-title"></h2>
+                <button class="element__raiting-icon hover" type="button" aria-label="Отметка Нравится"></button>
+            </div>
+        </article>
+    </template>
     <script src="./script.js"></script>
 </body>
 
