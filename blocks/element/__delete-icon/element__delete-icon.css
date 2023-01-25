@@ -1,0 +1,11 @@
+.element__delete-icon {
+    margin: 0;
+    padding: 0;
+    width: 18px;
+    height: 19px;
+    background: url(../../../images/delete-icon.svg) no-repeat center;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

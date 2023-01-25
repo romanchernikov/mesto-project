@@ -1,0 +1,12 @@
+.popup__container-zoomImage {
+    margin: 0;
+    padding: 0;
+    max-width: 75vh;
+    max-height: 75vh;
+}
+
+@media screen and (max-width: 1179px) {
+    .popup__container-zoomImage {
+        width: 240px;
+    }
+}

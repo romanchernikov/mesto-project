@@ -1,0 +1,4 @@
+.element__rating-icon_active {
+    opacity: 1;
+    background: url(../../../../images/heart-black.svg) center no-repeat;
+}
