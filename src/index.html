@@ -37,49 +37,46 @@
                 </template>
             </section>
             <section class="popup" data-editForm>
-                <div class="popup__container">
-                    <form class="popup__body" name="edit-form">
-                        <button class="popup__button-close hover" type="button"
-                            aria-label="Закрыть редактирование профиля" data-editFormClose></button>
-                        <div class="popup__group">
-                            <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
-                            <fieldset class="popup__input-container">
-                                <input class="popup__item input__text_type_name" type="text" placeholder="Имя"
-                                    name="edit-name" value="Жак-Ив Кусто" required>
-                                <input class="popup__item input__text_type_hobby" type="text" placeholder="Занятие"
-                                    name="edit-hobby" value="Исследователь океана" required>
-                            </fieldset>
-                            <fieldset class="popup__handlers">
-                                <button class="popup__button-submit" type="submit">Сохранить</button>
-                            </fieldset>
-                        </div>
-                    </form>
-                </div>
+                <form class="popup__body" name="edit">
+                    <button class="popup__button-close hover" type="button" aria-label="Закрыть редактирование профиля"
+                        data-editFormClose></button>
+                    <div class="popup__group">
+                        <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
+                        <fieldset class="popup__input-container">
+                            <input id="name-input" class="popup__input" type="text" placeholder="Имя" name="nameEdit"
+                                value="" minlength="2" maxlength="40" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)" required>
+                            <span class="name-input-error popup__input-error"></span>
+                            <input id="hobby-input" class="popup__input" type="text" placeholder="Занятие"
+                                name="hobbyEdit" value="" minlength="2" maxlength="200"
+                                pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)" required>
+                            <span class="hobby-input-error popup__input-error"></span>
+                        </fieldset>
+                        <button class="popup__button-submit" type="submit" name="submit">Сохранить</button>
+                    </div>
+                </form>
             </section>
             <section class="popup" data-addCard>
-                <div class="popup__container">
-                    <form class="popup__body" name="add-form">
-                        <button class="popup__button-close hover" type="button" aria-label="Закрыть добавление карточки"
-                            data-addCardClose></button>
-                        <div class="popup__group">
-                            <h2 class="popup__heading">Новое&nbsp;место</h2>
-                            <fieldset class="popup__input-container">
-                                <input class="popup__item input__text_type_name-card" type="text" placeholder="Название"
-                                    name="edit-name-card" required>
-                                <input class="popup__item input__text_type_link-card" type="text"
-                                    placeholder="Ссылка на картинку" name="edit-link-card" required>
-                            </fieldset>
-                            <fieldset class="popup__handlers">
-                                <button class="popup__button-submit" type="submit">Сохранить</button>
-                            </fieldset>
-                        </div>
-                    </form>
-                </div>
+                <form class="popup__body" name="add">
+                    <button class="popup__button-close hover" type="button" aria-label="Закрыть добавление карточки"
+                        data-addCardClose></button>
+                    <div class="popup__group">
+                        <h2 class="popup__heading">Новое&nbsp;место</h2>
+                        <fieldset class="popup__input-container">
+                            <input id="name-card-input" class="popup__input" type="url" placeholder="Название"
+                                name="nameCard" minlength="2" maxlength="30" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)" required>
+                            <span class="name-card-input-error popup__input-error"></span>
+                            <input id="link-input" class="popup__input" type="text" placeholder="Ссылка на картинку"
+                                name="linkCard" required>
+                            <span class="link-input-error popup__input-error"></span>
+                        </fieldset>
+                        <button class="popup__button-submit" type="submit" name="submit">Создать</button>
+                    </div>
+                </form>
             </section>
 
             <section class="popup popup_zoom" data-zoomImage>
                 <div class="popup__container-zoomImage">
-                    <form class="popup__body" name="zoom-form">
+                    <form class="popup__body" name="zoom">
                         <button class="popup__button-close hover" type="button" aria-label="Закрыть увеличение картинки"
                             data-zoomImageClose></button>
                         <img src="" alt="" class="popup__big-image">
