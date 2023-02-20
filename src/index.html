@@ -43,15 +43,22 @@
                     <div class="popup__group">
                         <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
                         <fieldset class="popup__input-container">
-                            <input id="name-input" class="popup__input" type="text" placeholder="Имя" name="nameEdit"
-                                value="" minlength="2" maxlength="40" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
-                                data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
-                                required>
-                            <span class="name-input-error popup__input-error"></span>
-                            <input id="hobby-input" class="popup__input" type="text" placeholder="Занятие"
-                                name="hobbyEdit" value="" minlength="2" maxlength="200"
-                                pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)" required>
-                            <span class="hobby-input-error popup__input-error"></span>
+                            <label for="name-input" class="popup__field">
+                                <input id="name-input" class="popup__input" type="text" placeholder="Имя"
+                                    name="nameEdit" value="" minlength="2" maxlength="40"
+                                    pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
+                                    data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
+                                    required>
+                                <span class="name-input-error popup__input-error"></span>
+                            </label>
+                            <label for="hobby-input" class="popup__field">
+                                <input id="hobby-input" class="popup__input" type="text" placeholder="Занятие"
+                                    name="hobbyEdit" value="" minlength="2" maxlength="200"
+                                    pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
+                                    data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
+                                    required>
+                                <span class="hobby-input-error popup__input-error"></span>
+                            </label>
                         </fieldset>
                         <button class="popup__button-submit" type="submit" name="submit">Сохранить</button>
                     </div>
@@ -64,14 +71,18 @@
                     <div class="popup__group">
                         <h2 class="popup__heading">Новое&nbsp;место</h2>
                         <fieldset class="popup__input-container">
-                            <input id="name-card-input" class="popup__input" type="text" placeholder="Название"
-                                name="nameCard" minlength="2" maxlength="30" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
-                                data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
-                                required>
-                            <span class="name-card-input-error popup__input-error"></span>
-                            <input id="link-input" class="popup__input" type="url" placeholder="Ссылка на картинку"
-                                name="linkCard" required>
-                            <span class="link-input-error popup__input-error"></span>
+                            <label for="name-card-input" class="popup__field">
+                                <input id="name-card-input" class="popup__input" type="text" placeholder="Название"
+                                    name="nameCard" minlength="2" maxlength="30" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
+                                    data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
+                                    required>
+                                <span class="name-card-input-error popup__input-error"></span>
+                            </label>
+                            <label for="link-input" class="popup__field">
+                                <input id="link-input" class="popup__input" type="url" placeholder="Ссылка на картинку"
+                                    name="linkCard" required>
+                                <span class="link-input-error popup__input-error"></span>
+                            </label>
                         </fieldset>
                         <button class="popup__button-submit popup__button-submit_disabled" type="submit" name="submit"
                             disabled>Создать</button>
