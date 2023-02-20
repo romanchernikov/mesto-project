@@ -1,45 +1,15 @@
 import { closePopup, openPopup } from "./modal";
 import { popupAddCard } from "./utils";
+import { initialCards } from "./constant";
 
 const formAdd = document.forms.add;
 const nameCardAdd = formAdd.elements.nameCard;
 const linkCardAdd = formAdd.elements.linkCard;
-
 const elementTemplate = document.querySelector('#element__template').content;
 const elementsContainer = document.querySelector('.elements');
-
 const popupZoomImage = document.querySelector('[data-zoomImage]');
 const zoomImage = document.querySelector('.popup__big-image');
 const zoomImageText = document.querySelector('.popup__image-text');
-
-
-
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 function initalizationCards() {
     initialCards.forEach((item) => {
