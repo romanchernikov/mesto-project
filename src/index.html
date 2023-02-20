@@ -17,10 +17,10 @@
             <section class="profile">
                 <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватарка страницы">
                 <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button class="profile__edit-button hover" type="button"
                         aria-label="Редактировать профиль"></button>
-                    <p class="profile__hobby">Исследователь&nbsp;океана</p>
+                    <p class="profile__hobby">Исследователь океана</p>
                 </div>
                 <button class="add-button hover" type="button" aria-label="Добавить контент"></button>
             </section>
@@ -44,7 +44,9 @@
                         <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
                         <fieldset class="popup__input-container">
                             <input id="name-input" class="popup__input" type="text" placeholder="Имя" name="nameEdit"
-                                value="" minlength="2" maxlength="40" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)" required>
+                                value="" minlength="2" maxlength="40" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
+                                data-error-message="Поле может содержать только латинские буквы, кириллические буквы, знаки дефиса и пробелы."
+                                required>
                             <span class="name-input-error popup__input-error"></span>
                             <input id="hobby-input" class="popup__input" type="text" placeholder="Занятие"
                                 name="hobbyEdit" value="" minlength="2" maxlength="200"
@@ -62,14 +64,17 @@
                     <div class="popup__group">
                         <h2 class="popup__heading">Новое&nbsp;место</h2>
                         <fieldset class="popup__input-container">
-                            <input id="name-card-input" class="popup__input" type="url" placeholder="Название"
-                                name="nameCard" minlength="2" maxlength="30" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)" required>
+                            <input id="name-card-input" class="popup__input" type="text" placeholder="Название"
+                                name="nameCard" minlength="2" maxlength="30" pattern="(^[а-яА-ЯёЁa-zA-Z -]+$)"
+                                data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы."
+                                required>
                             <span class="name-card-input-error popup__input-error"></span>
-                            <input id="link-input" class="popup__input" type="text" placeholder="Ссылка на картинку"
+                            <input id="link-input" class="popup__input" type="url" placeholder="Ссылка на картинку"
                                 name="linkCard" required>
                             <span class="link-input-error popup__input-error"></span>
                         </fieldset>
-                        <button class="popup__button-submit" type="submit" name="submit">Создать</button>
+                        <button class="popup__button-submit popup__button-submit_disabled" type="submit" name="submit"
+                            disabled>Создать</button>
                     </div>
                 </form>
             </section>
@@ -91,7 +96,6 @@
             <p class="footer__copyright">&COPY;&nbsp;2022&nbsp;Mesto&nbsp;Russia</p>
         </footer>
     </div>
-    <script src="./scripts/script.js"></script>
 </body>
 
 </html>
