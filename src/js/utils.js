@@ -1,4 +1,5 @@
 import { closePopup, popupEditForm, popupAddCard } from "./modal";
+import { removeInputsErrors } from "./validate";
 
 const overlay = document.querySelectorAll('.popup');
 const profileName = document.querySelector('.profile__name');
@@ -23,6 +24,7 @@ function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileName.innerText = nameEdit.value.trim();
     profileHobby.innerText = hobbyEdit.value.trim();
+    removeInputsErrors(popupEditForm);
     closePopup(popupEditForm);
 }
 
@@ -30,20 +32,8 @@ overlay.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
             closePopup(popup);
-            removeInputsErrors(popup);
         }
     });
 });
-
-function removeInputsErrors(popup) {
-    const inputList = Array.from(popup.querySelectorAll('.popup__input'));
-    fillProfileInputs();
-    inputList.forEach((inputElement) => {
-        inputElement.classList.remove('popup__input_type_error');
-        popup.querySelectorAll('.popup__input-error').forEach((spanElement) => {
-            spanElement.classList.remove('popup__input-error_active');
-        });
-    });
-};
 
 export { closePopupEscape, popupAddCard, fillProfileInputs, handleProfileFormSubmit };

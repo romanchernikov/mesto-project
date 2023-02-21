@@ -1,6 +1,7 @@
 import { closePopup, openPopup } from "./modal";
 import { popupAddCard } from "./utils";
 import { initialCards } from "./constant";
+import { removeInputsErrors, setDisabledButton } from "./validate";
 
 const formAdd = document.forms.add;
 const nameCardAdd = formAdd.elements.nameCard;
@@ -44,6 +45,8 @@ function handleAddCardFormSubmit(evt) {
     evt.preventDefault();
     elementsContainer.prepend(createCard(nameCardAdd.value, linkCardAdd.value));
     evt.target.reset();
+    removeInputsErrors(popupAddCard);
+    setDisabledButton(popupAddCard);
     closePopup(popupAddCard);
 }
 
