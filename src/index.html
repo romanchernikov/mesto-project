@@ -15,12 +15,15 @@
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватарка страницы">
+                <div class="profile__avatar-container">
+                    <img class="profile__avatar" src="#" alt="Аватарка страницы">
+                    <button class="profile__avatar-edit" type="button"></button>
+                </div>
                 <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name"></h1>
                     <button class="profile__edit-button hover" type="button"
                         aria-label="Редактировать профиль"></button>
-                    <p class="profile__hobby">Исследователь океана</p>
+                    <p class="profile__hobby"></p>
                 </div>
                 <button class="add-button hover" type="button" aria-label="Добавить контент"></button>
             </section>
@@ -31,7 +34,11 @@
                         <button class="element__delete-icon hover" type="button" aria-label="Удалить карточку"></button>
                         <div class="element__title-box">
                             <h2 class="element__image-title"></h2>
-                            <button class="element__rating-icon" type="button" aria-label="Отметка Нравится"></button>
+                            <div class="element__like-container">
+                                <button class="element__rating-icon" type="button"
+                                    aria-label="Отметка Нравится"></button>
+                                <span class="element__like-counter"></span>
+                            </div>
                         </div>
                     </article>
                 </template>
@@ -86,6 +93,25 @@
                         </fieldset>
                         <button class="popup__button-submit popup__button-submit_disabled" type="submit" name="submit"
                             disabled>Создать</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="popup" data-editAvatar>
+                <form class="popup__body" name="avatarEdit">
+                    <button class="popup__button-close hover" type="button" aria-label="Закрыть добавление карточки"
+                        data-addCardClose></button>
+                    <div class="popup__group">
+                        <h2 class="popup__heading">Обновить аватар</h2>
+                        <fieldset class="popup__input-container">
+                            <label for="link-input" class="popup__field">
+                                <input id="link-input" class="popup__input" type="url" placeholder="Ссылка на картинку"
+                                    name="linkAvatar" required>
+                                <span class="link-input-error popup__input-error"></span>
+                            </label>
+                        </fieldset>
+                        <button class="popup__button-submit popup__button-submit_disabled" type="submit" name="submit"
+                            disabled>Сохранить</button>
                     </div>
                 </form>
             </section>

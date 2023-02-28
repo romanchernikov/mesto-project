@@ -1,6 +1,7 @@
 .element__delete-icon {
     margin: 0;
     padding: 0;
+    visibility: hidden;
     width: 18px;
     height: 19px;
     background: url(../../../images/delete-icon.svg) no-repeat center;
