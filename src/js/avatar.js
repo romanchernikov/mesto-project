@@ -1,15 +1,7 @@
-import { openPopup, closePopup } from "./modal";
+import { openPopup, closePopup } from "./utils";
 import { postAvatar } from "./api";
+import { avatarButton, avatarContainer, avatarInput, avatarPopup, buttonAvatarSubmit, avatarImage } from "./constant.js";
 
-const avatarPopup = document.querySelector('[data-editAvatar]');
-const avatarForm = document.forms.avatarEdit;
-const avatarInput = avatarForm.elements.linkAvatar;
-const avatarContainer = document.querySelector('.profile__avatar-container');
-const avatarButton = document.querySelector('.profile__avatar-edit');
-const avatarImage = document.querySelector('.profile__avatar');
-const buttonAvatarSubmit = avatarForm.querySelector('.popup__button-submit');
-
-console.log(avatarInput);
 function addAvatarButton() {
     avatarButton.style.visibility = 'visible';
     avatarContainer.removeEventListener('mouseover', removeAvatarButton);
@@ -42,4 +34,4 @@ function handleEditAvatar(evt) {
 
 }
 
-export { avatarContainer, addAvatarButton, removeAvatarButton, openAvatarPopup, handleEditAvatar, avatarForm }
+export { avatarContainer, addAvatarButton, removeAvatarButton, openAvatarPopup, handleEditAvatar }

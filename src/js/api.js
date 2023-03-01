@@ -21,10 +21,7 @@ function getCards() {
 function postProfileInfo(name, about) {
     return fetch(`${config.baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: {
-            authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             name: name,
             about: about
@@ -36,10 +33,7 @@ function postProfileInfo(name, about) {
 function postCard(name, link) {
     return fetch(`${config.baseUrl}/cards`, {
         method: 'POST',
-        headers: {
-            authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             name: name,
             link: link
@@ -51,10 +45,7 @@ function postCard(name, link) {
 function delCard(id) {
     return fetch(`${config.baseUrl}/cards/${id}`, {
         method: 'DELETE',
-        headers: {
-            authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
     })
         .then(checkResponse)
 }
@@ -62,10 +53,7 @@ function delCard(id) {
 function postAvatar(link) {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: {
-            authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
         body: JSON.stringify({
             avatar: link
         })
@@ -76,10 +64,7 @@ function postAvatar(link) {
 function addLike(id) {
     return fetch(`${config.baseUrl}/cards/likes/${id}`, {
         method: 'PUT',
-        headers: {
-            authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
     })
         .then(checkResponse)
 }
@@ -87,10 +72,7 @@ function addLike(id) {
 function delLike(id) {
     return fetch(`${config.baseUrl}/cards/likes/${id}`, {
         method: 'DELETE',
-        headers: {
-            authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
-            'Content-Type': 'application/json'
-        },
+        headers: config.headers,
     })
         .then(checkResponse)
 }
