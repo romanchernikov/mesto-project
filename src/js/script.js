@@ -1,17 +1,21 @@
 import '../../src/pages/index.css';
-import { enableValidation, removeInputsErrors } from './validate';
+import { enableValidation } from './validate';
 import { handleAddCardFormSubmit, elementsContainer, createCard } from './card';
 import { closePopup, openPopup } from './utils';
-import { avatarForm, popupAddCard, popupEditForm, profileEditButton, addCardButton, validationConfig, avatarImage, profileName, profileHobby, buttonEditSubmit, nameEdit, hobbyEdit } from './constant';
+import { fillProfileInputs } from './modal';
+import { overlays, avatarForm, popupAddCard, popupEditForm, profileEditButton, addCardButton, validationConfig, avatarImage, profileName, profileHobby, buttonEditSubmit, nameEdit, hobbyEdit } from './constant';
 import { avatarContainer, addAvatarButton, removeAvatarButton, openAvatarPopup, handleEditAvatar } from './avatar';
 import { getProfileInfo, getCards, postProfileInfo } from './api';
 
 let myId;
 
-function fillProfileInputs() {
-    nameEdit.value = profileName.innerText;
-    hobbyEdit.value = profileHobby.innerText;
-}
+overlays.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
+            closePopup(popup);
+        }
+    });
+});
 
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -20,7 +24,6 @@ function handleProfileFormSubmit(evt) {
         .then(() => {
             profileName.innerText = nameEdit.value.trim();
             profileHobby.innerText = hobbyEdit.value.trim();
-            removeInputsErrors(popupEditForm);
             closePopup(popupEditForm);
         })
         .catch(err => {

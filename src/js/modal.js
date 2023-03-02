@@ -1,10 +1,8 @@
-import { overlays } from "./constant";
-import { closePopup } from "./utils";
+import { nameEdit, hobbyEdit, profileName, profileHobby } from "./constant";
 
-overlays.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
-            closePopup(popup);
-        }
-    });
-});
+function fillProfileInputs() {
+    nameEdit.value = profileName.innerText;
+    hobbyEdit.value = profileHobby.innerText;
+}
+
+export { fillProfileInputs }

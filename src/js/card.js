@@ -1,6 +1,6 @@
 import { closePopup, openPopup } from "./utils";
 import { myId } from "./script";
-import { removeInputsErrors, setDisabledButton } from "./validate";
+import { setDisabledButton } from "./validate";
 import { postCard, delCard, addLike, delLike } from "./api";
 import { popupAddCard, popupZoomImage, zoomImage, elementTemplate, zoomImageText, buttonAddSubmit, nameCardAdd, linkCardAdd, elementsContainer } from "./constant";
 
@@ -81,7 +81,6 @@ function handleAddCardFormSubmit(evt) {
     postCard(nameCardAdd.value.trim(), linkCardAdd.value.trim())
         .then(element => {
             evt.target.reset();
-            removeInputsErrors(popupAddCard);
             setDisabledButton(popupAddCard);
             closePopup(popupAddCard);
             elementsContainer.prepend(createCard(element.name, element.link, element.likes, element.owner._id, element._id));

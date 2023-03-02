@@ -1,17 +1,4 @@
-function removeInputsErrors(popup) {
-    const inputList = Array.from(popup.querySelectorAll('.popup__input'));
-    inputList.forEach((inputElement) => {
-        inputElement.classList.remove('popup__input_type_error');
-        popup.querySelectorAll('.popup__input-error').forEach((spanElement) => {
-            spanElement.classList.remove('popup__input-error_active');
-        });
-    });
-};
-function setDisabledButton(popup) {
-    const buttonSubmit = popup.querySelector('.popup__button-submit');
-    buttonSubmit.classList.add('popup__button-submit_disabled');
-    buttonSubmit.disabled = true;
-}
+import { setDisabledButton } from "./utils";
 
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -75,4 +62,4 @@ const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, i
     });
 };
 
-export { enableValidation, removeInputsErrors, setDisabledButton };
+export { enableValidation, setDisabledButton };

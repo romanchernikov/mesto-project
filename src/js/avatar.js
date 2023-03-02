@@ -1,6 +1,7 @@
 import { openPopup, closePopup } from "./utils";
 import { postAvatar } from "./api";
 import { avatarButton, avatarContainer, avatarInput, avatarPopup, buttonAvatarSubmit, avatarImage } from "./constant.js";
+import { setDisabledButton } from "./validate";
 
 function addAvatarButton() {
     avatarButton.style.visibility = 'visible';
@@ -23,6 +24,7 @@ function handleEditAvatar(evt) {
         .then(res => {
             avatarImage.src = res.avatar;
             evt.target.reset();
+            setDisabledButton(avatarPopup);
             closePopup(avatarPopup);
         })
         .catch(err => {
