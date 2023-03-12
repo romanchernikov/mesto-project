@@ -65,6 +65,7 @@ avatarContainer.addEventListener('mouseout', removeAvatarButton);
 avatarContainer.addEventListener('click', openAvatarPopup);
 avatarForm.addEventListener('submit', handleEditAvatar);
 
+console.log('Я был здесь');
 
 enableValidation(validationConfig);
 
