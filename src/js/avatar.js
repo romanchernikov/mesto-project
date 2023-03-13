@@ -1,7 +1,8 @@
 import { openPopup, closePopup } from "./utils";
-import { postAvatar } from "./api";
 import { avatarButton, avatarContainer, avatarInput, avatarPopup, buttonAvatarSubmit, avatarImage } from "./constant.js";
 import { setDisabledButton } from "./validate";
+import { Api } from "../components/Api";
+import { Popup } from "../components/Popup";
 
 function addAvatarButton() {
     avatarButton.style.visibility = 'visible';
@@ -14,26 +15,32 @@ function removeAvatarButton() {
 }
 
 function openAvatarPopup() {
-    openPopup(avatarPopup);
+    const openPopup = new Popup(avatarPopup);
+    openPopup.openPopup();
+    openPopup.setEventListeners();
+    // openPopup(avatarPopup);
 }
 
 function handleEditAvatar(evt) {
     evt.preventDefault();
     buttonAvatarSubmit.textContent = 'Сохранение...';
-    postAvatar(avatarInput.value)
-        .then(res => {
+    const postAvatar = new Api('/users/me/avatar', 'PATCH', JSON.stringify({
+        avatar: avatarInput.value
+    }));
+      return postAvatar.response().then(res => {
             avatarImage.src = res.avatar;
             evt.target.reset();
             setDisabledButton(avatarPopup);
-            closePopup(avatarPopup);
+            const closePopup = new Popup(avatarPopup);
+            closePopup.closePopup();
+            // closePopup(avatarPopup);
         })
         .catch(err => {
             console.log(err);
         })
         .finally(() => {
             buttonAvatarSubmit.textContent = 'Сохранить';
-        })
-
+        });
 }
 
 export { avatarContainer, addAvatarButton, removeAvatarButton, openAvatarPopup, handleEditAvatar }
