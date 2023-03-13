@@ -14,6 +14,7 @@ import {
 } from "./constant";
 import { Api } from "../components/Api";
 import { Popup } from "../components/Popup";
+import { PopupWithImage } from "../components/PopupWithImage";
 
 export class Card {
     constructor(nameValue, srcValue, likes, ownerId, cardId, myId) {
@@ -26,7 +27,7 @@ export class Card {
     }
 
     _getElement() {
-        return elementTemplate.querySelector( '.element' ).cloneNode( true );
+        return elementTemplate.querySelector('.element').cloneNode(true);
     }
 
     generate() {
@@ -112,15 +113,10 @@ export class Card {
         });
 
         this._userImage.addEventListener('click', evt => {
-            const avc = new Popup(popupZoomImage);
-            avc.openPopup();
-            avc.setEventListeners();
+            const popupImage = new PopupWithImage(popupZoomImage);
+            popupImage.openPopup(evt);
+            popupImage.setEventListeners();
             // openPopup(popupZoomImage);
-            const srcImage = evt.target.getAttribute('src');
-            const altImage = evt.target.getAttribute('alt');
-            zoomImage.setAttribute('src', srcImage);
-            zoomImage.setAttribute('alt', altImage);
-            zoomImageText.innerText = altImage;
         });
     }
 }
@@ -128,7 +124,7 @@ export class Card {
 function handleAddCardFormSubmit(evt) {
     evt.preventDefault();
     buttonAddSubmit.textContent = 'Сохранение...';
-    const postCard = new Api ('/cards', 'POST', JSON.stringify({
+    const postCard = new Api('/cards', 'POST', JSON.stringify({
         name: nameCardAdd.value.trim(),
         link: linkCardAdd.value.trim()
     }));

@@ -1,4 +1,3 @@
-import { openPopup, closePopup } from "./utils";
 import { avatarButton, avatarContainer, avatarInput, avatarPopup, buttonAvatarSubmit, avatarImage } from "./constant.js";
 import { setDisabledButton } from "./validate";
 import { Api } from "../components/Api";
@@ -27,14 +26,14 @@ function handleEditAvatar(evt) {
     const postAvatar = new Api('/users/me/avatar', 'PATCH', JSON.stringify({
         avatar: avatarInput.value
     }));
-      return postAvatar.response().then(res => {
-            avatarImage.src = res.avatar;
-            evt.target.reset();
-            setDisabledButton(avatarPopup);
-            const closePopup = new Popup(avatarPopup);
-            closePopup.closePopup();
-            // closePopup(avatarPopup);
-        })
+    return postAvatar.response().then(res => {
+        avatarImage.src = res.avatar;
+        evt.target.reset();
+        setDisabledButton(avatarPopup);
+        const closePopup = new Popup(avatarPopup);
+        closePopup.closePopup();
+        // closePopup(avatarPopup);
+    })
         .catch(err => {
             console.log(err);
         })
