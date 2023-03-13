@@ -21,4 +21,6 @@ function setDisabledButton(popup) {
     buttonSubmit.disabled = true;
 }
 
+console.log('нормально бомбим проектик');
+
 export { closePopup, closePopupEscape, openPopup, setDisabledButton };
