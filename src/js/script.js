@@ -110,3 +110,5 @@ enableValidation.enableValidation();
 // enableValidation(validationConfig);
 
 export { myId };
+
+console.log('попробуем так');
