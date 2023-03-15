@@ -63,38 +63,44 @@ profileEditButton.addEventListener('click', function () {
 // '[name=avatarEdit]'
 popupEditForm.addEventListener('submit', handleProfileFormSubmit);
 
-
+const popupForm = new PopupWithForm({
+    selector: popupAddCard,
+    submitForm: (input) => {
+        console.log(input)
+    }
+});
 
 addCardButton.addEventListener('click',  () => {
+    popupForm.openPopup();
+    popupForm.setEventListeners()
     // const openPopup = new Popup(popupAddCard);
     // openPopup.openPopup();
     // openPopup.setEventListeners();
-    const popupForm = new PopupWithForm({
-        selector: popupAddCard,
-        submitForm: (input) => {
-            console.log(input)
+    // const popupForm = new PopupWithForm({
+    //     selector: popupAddCard,
+    //     submitForm: (input) => {
+    //         console.log(input)
+    //
+    //         // const postCard = new Api('/cards', 'POST', JSON.stringify({
+    //         //     name: input.name,
+    //         //     link: input.link
+    //         // }));
+    //         // postCard.response().then(element => {
+    //         //     setDisabledButton(popupAddCard);
+    //         //     popupForm.rem()
+    //         //     popupForm.closePopup();
+    //         //     const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
+    //         //     const card = createCard.generate();
+    //         //     elementsContainer.prepend(card);
+    //         // }).catch(err => {
+    //         //     console.log(err);
+    //         // })
+    //         // .finally(() => {
+    //         //     buttonAddSubmit.textContent = 'Сохранить';
+    //         // });
+    //     }
+    // });
 
-            // const postCard = new Api('/cards', 'POST', JSON.stringify({
-            //     name: input.name,
-            //     link: input.link
-            // }));
-            // postCard.response().then(element => {
-            //     setDisabledButton(popupAddCard);
-            //     popupForm.rem()
-            //     popupForm.closePopup();
-            //     const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
-            //     const card = createCard.generate();
-            //     elementsContainer.prepend(card);
-            // }).catch(err => {
-            //     console.log(err);
-            // })
-            // .finally(() => {
-            //     buttonAddSubmit.textContent = 'Сохранить';
-            // });
-        }
-    });
-    popupForm.openPopup();
-    popupForm.setEventListeners()
 });
 
 const getProfileInfo = new Api('/users/me');
