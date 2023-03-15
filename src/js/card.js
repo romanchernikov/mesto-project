@@ -122,28 +122,28 @@ export class Card {
 }
 
 function handleAddCardFormSubmit(evt) {
-    evt.preventDefault();
-    buttonAddSubmit.textContent = 'Сохранение...';
-    const postCard = new Api('/cards', 'POST', JSON.stringify({
-        name: nameCardAdd.value.trim(),
-        link: linkCardAdd.value.trim()
-    }));
-    return postCard.response().then(element => {
-        evt.target.reset();
-        setDisabledButton(popupAddCard);
-        const closePopup = new Popup(popupAddCard);
-        closePopup.closePopup();
-        // closePopup(popupAddCard);
-        const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
-        const card = createCard.generate();
-        elementsContainer.prepend(card);
-    })
-        .catch(err => {
-            console.log(err);
-        })
-        .finally(() => {
-            buttonAddSubmit.textContent = 'Сохранить';
-        });
+    // evt.preventDefault();
+    // buttonAddSubmit.textContent = 'Сохранение...';
+    // const postCard = new Api('/cards', 'POST', JSON.stringify({
+    //     name: nameCardAdd.value.trim(),
+    //     link: linkCardAdd.value.trim()
+    // }));
+    // return postCard.response().then(element => {
+    //     evt.target.reset();
+    //     setDisabledButton(popupAddCard);
+    //     const closePopup = new Popup(popupAddCard);
+    //     closePopup.closePopup();
+    //     // closePopup(popupAddCard);
+    //     const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
+    //     const card = createCard.generate();
+    //     elementsContainer.prepend(card);
+    // })
+    //     .catch(err => {
+    //         console.log(err);
+    //     })
+    //     .finally(() => {
+    //         buttonAddSubmit.textContent = 'Сохранить';
+    //     });
 }
 
 export { handleAddCardFormSubmit, elementsContainer };
