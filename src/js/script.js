@@ -1,24 +1,33 @@
 import '../../src/pages/index.css';
 // import { enableValidation } from './validate';
 import { handleAddCardFormSubmit, elementsContainer, Card } from './card';
-import { closePopup, openPopup } from './utils';
+import { closePopup, openPopup, setDisabledButton } from './utils';
 import { fillProfileInputs } from './modal';
-import { overlays, avatarForm, popupAddCard, popupEditForm, profileEditButton, addCardButton, validationConfig, avatarImage, profileName, profileHobby, buttonEditSubmit, nameEdit, hobbyEdit } from './constant';
+import {
+    overlays,
+    avatarForm,
+    popupAddCard,
+    popupEditForm,
+    profileEditButton,
+    addCardButton,
+    validationConfig,
+    avatarImage,
+    profileName,
+    profileHobby,
+    buttonEditSubmit,
+    nameEdit,
+    hobbyEdit,
+    nameCardAdd,
+    linkCardAdd, buttonAddSubmit
+} from './constant';
 import { avatarContainer, addAvatarButton, removeAvatarButton, openAvatarPopup, handleEditAvatar } from './avatar';
 import { Api } from "../components/Api";
 import { FormValidator } from "../components/FormValidator";
 import { Popup } from "../components/Popup";
 import { Section } from '../components/Section';
+import { PopupWithForm } from "../components/PopupWithForm";
 
 let myId;
-
-// overlays.forEach((popup) => {
-// popup.addEventListener('mousedown', (evt) => {
-//     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__button-close')) {
-//         closePopup(popup);
-//     }
-// });
-// });
 
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
@@ -42,7 +51,7 @@ function handleProfileFormSubmit(evt) {
         });
 }
 
-popupAddCard.addEventListener('submit', handleAddCardFormSubmit);
+// popupAddCard.addEventListener('submit', handleAddCardFormSubmit);
 profileEditButton.addEventListener('click', function () {
     const openPopup = new Popup(popupEditForm);
     openPopup.openPopup();
@@ -51,13 +60,41 @@ profileEditButton.addEventListener('click', function () {
     // openPopup(popupEditForm);
 });
 
+// '[name=avatarEdit]'
 popupEditForm.addEventListener('submit', handleProfileFormSubmit);
 
-addCardButton.addEventListener('click', function () {
-    const openPopup = new Popup(popupAddCard);
-    openPopup.openPopup();
-    openPopup.setEventListeners();
-    // openPopup(popupAddCard);
+
+
+addCardButton.addEventListener('click',  () => {
+    // const openPopup = new Popup(popupAddCard);
+    // openPopup.openPopup();
+    // openPopup.setEventListeners();
+    const popupForm = new PopupWithForm({
+        selector: popupAddCard,
+        submitForm: (input) => {
+            console.log(input)
+
+            // const postCard = new Api('/cards', 'POST', JSON.stringify({
+            //     name: input.name,
+            //     link: input.link
+            // }));
+            // postCard.response().then(element => {
+            //     setDisabledButton(popupAddCard);
+            //     popupForm.rem()
+            //     popupForm.closePopup();
+            //     const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
+            //     const card = createCard.generate();
+            //     elementsContainer.prepend(card);
+            // }).catch(err => {
+            //     console.log(err);
+            // })
+            // .finally(() => {
+            //     buttonAddSubmit.textContent = 'Сохранить';
+            // });
+        }
+    });
+    popupForm.openPopup();
+    popupForm.setEventListeners()
 });
 
 const getProfileInfo = new Api('/users/me');
@@ -110,5 +147,3 @@ enableValidation.enableValidation();
 // enableValidation(validationConfig);
 
 export { myId };
-
-console.log('попробуем так');
