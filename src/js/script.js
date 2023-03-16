@@ -61,14 +61,34 @@ profileEditButton.addEventListener('click', function () {
 });
 
 // '[name=avatarEdit]'
-popupEditForm.addEventListener('submit', handleProfileFormSubmit);
 
 const popupForm = new PopupWithForm({
     selector: popupAddCard,
-    submitForm: (input) => {
-        console.log(input)
+    submitForm: () => {
+        popupAddCard.addEventListener('submit', submitForm)
     }
 });
+
+function submitForm(evt) {
+    evt.preventDefault()
+    popupAddCard.removeEventListener('submit', submitForm);
+        const postCard = new Api('/cards', 'POST', JSON.stringify({
+            name: popupForm._getInputValues().name,
+            link: popupForm._getInputValues().link
+        }));
+        postCard.response().then(element => {
+            setDisabledButton(popupAddCard);
+            popupForm.closePopup();
+            const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
+            const card = createCard.generate();
+            elementsContainer.prepend(card);
+        }).catch(err => {
+            console.log(err);
+        })
+        .finally(() => {
+            buttonAddSubmit.textContent = 'Сохранить';
+        });
+}
 
 addCardButton.addEventListener('click',  () => {
     popupForm.openPopup();
