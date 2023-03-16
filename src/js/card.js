@@ -122,7 +122,8 @@ export class Card {
 }
 
 function handleAddCardFormSubmit(evt) {
-    // evt.preventDefault();
+    evt.preventDefault();
+    console.log('123')
     // buttonAddSubmit.textContent = 'Сохранение...';
     // const postCard = new Api('/cards', 'POST', JSON.stringify({
     //     name: nameCardAdd.value.trim(),

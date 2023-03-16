@@ -13,6 +13,7 @@ export class PopupWithForm extends Popup {
         this._inputList.forEach(input => {
             this._formValues[input.name] = input.value;
         });
+
         return this._formValues;
     }
 
@@ -22,19 +23,11 @@ export class PopupWithForm extends Popup {
         return formElement;
     }
 
-    rem() {
-        this._element.removeEventListener('submit', this._send.bind(this));
-    }
-
-    _send(evt) {
-        evt.preventDefault();
-        this._submitForm(this._getInputValues());
-    }
-
     setEventListeners() {
         super.setEventListeners();
         this._element = this._getElement();
-        this._element.addEventListener('submit', this._send.bind(this));
+        this._submitForm()
+        // this._element.addEventListener('submit', this._send.bind(this));
     }
 
     // setEventListeners() {
