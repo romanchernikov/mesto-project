@@ -64,14 +64,14 @@ profileEditButton.addEventListener('click', function () {
 
 const popupForm = new PopupWithForm({
     selector: popupAddCard,
-    submitForm: () => {
-        popupAddCard.addEventListener('submit', submitForm)
-    }
 });
+
+popupAddCard.addEventListener('submit', (evt) => {
+    submitForm(evt)
+})
 
 function submitForm(evt) {
     evt.preventDefault()
-    popupAddCard.removeEventListener('submit', submitForm);
         const postCard = new Api('/cards', 'POST', JSON.stringify({
             name: popupForm._getInputValues().name,
             link: popupForm._getInputValues().link
