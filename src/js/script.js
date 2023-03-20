@@ -64,14 +64,7 @@ profileEditButton.addEventListener('click', function () {
 
 const popupForm = new PopupWithForm({
     selector: popupAddCard,
-});
-
-popupAddCard.addEventListener('submit', (evt) => {
-    submitForm(evt)
-})
-
-function submitForm(evt) {
-    evt.preventDefault()
+    callback: () => {
         const postCard = new Api('/cards', 'POST', JSON.stringify({
             name: popupForm._getInputValues().name,
             link: popupForm._getInputValues().link
@@ -85,14 +78,20 @@ function submitForm(evt) {
         }).catch(err => {
             console.log(err);
         })
-        .finally(() => {
-            buttonAddSubmit.textContent = 'Сохранить';
-        });
-}
+            .finally(() => {
+                buttonAddSubmit.textContent = 'Сохранить';
+            });
+    }
+});
+
+popupAddCard.addEventListener('submit', (evt) => {
+    evt.preventDefault()
+    popupForm.setEventListeners()
+})
 
 addCardButton.addEventListener('click',  () => {
     popupForm.openPopup();
-    popupForm.setEventListeners()
+    // popupForm.setEventListeners()
     // const openPopup = new Popup(popupAddCard);
     // openPopup.openPopup();
     // openPopup.setEventListeners();
@@ -120,8 +119,15 @@ addCardButton.addEventListener('click',  () => {
     //         // });
     //     }
     // });
-
 });
+
+// function submitForm(evt) {
+//     evt.preventDefault()
+//     const postCard = new Api('/cards', 'POST', JSON.stringify({
+//         name: popupForm._getInputValues().name,
+//         link: popupForm._getInputValues().link
+//     }));
+// }
 
 const getProfileInfo = new Api('/users/me');
 const getCards = new Api('/cards');
