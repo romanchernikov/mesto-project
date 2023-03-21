@@ -1,10 +1,15 @@
 import { Popup } from "./Popup";
 
 export class PopupWithForm extends Popup {
-    constructor({selector, callback}) {
+    constructor({ selector, submitCard }) {
         super(selector);
-        this._callback = callback;
+        this._submitCard = submitCard;
     }
+
+    _getElement() {
+        return this._selector.querySelector('.popup__body');
+    }
+
 
     _getInputValues() {
         this._inputList = this._selector.querySelectorAll('.popup__input');
@@ -17,30 +22,15 @@ export class PopupWithForm extends Popup {
         return this._formValues;
     }
 
-    _getElement() {
-        const formElement = this._selector.querySelector('.popup__body');
-
-        return formElement;
-    }
-
     setEventListeners() {
         super.setEventListeners();
-        this._callback()
         this._element = this._getElement();
-
-        // this._element.addEventListener('submit', this._send.bind(this));
+        this._submitCard(this._getInputValues());
     }
-
-    // setEventListeners() {
-    //     super.setEventListeners();
-    //     this._selector.addEventListener('submit', (evt) => {
-    //         this._send(evt)
-    //     });
-    // }
 
     closePopup() {
         super.closePopup();
-        // this._selector.reset()
+        this._element.reset();
     }
 
 }
