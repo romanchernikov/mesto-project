@@ -1,15 +1,14 @@
 import { Popup } from "./Popup";
 
 export class PopupWithForm extends Popup {
-    constructor({ selector, submitCard }) {
+    constructor({ selector, submitForm }) {
         super(selector);
-        this._submitCard = submitCard;
+        this._submitForm = submitForm;
     }
 
     _getElement() {
         return this._selector.querySelector('.popup__body');
     }
-
 
     _getInputValues() {
         this._inputList = this._selector.querySelectorAll('.popup__input');
@@ -25,7 +24,7 @@ export class PopupWithForm extends Popup {
     setEventListeners() {
         super.setEventListeners();
         this._element = this._getElement();
-        this._submitCard(this._getInputValues());
+        this._submitForm(this._getInputValues());
     }
 
     closePopup() {

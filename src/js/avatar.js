@@ -1,5 +1,5 @@
 import { avatarButton, avatarContainer, avatarInput, avatarPopup, buttonAvatarSubmit, avatarImage } from "./constant.js";
-import { setDisabledButton } from "./validate";
+import { setDisabledButton } from "./utils";
 import { Api } from "../components/Api";
 import { Popup } from "../components/Popup";
 
@@ -14,10 +14,9 @@ function removeAvatarButton() {
 }
 
 function openAvatarPopup() {
-    const openPopup = new Popup(avatarPopup);
+    const openPopup = new Popup('[data-editAvatar]');
     openPopup.openPopup();
     openPopup.setEventListeners();
-    // openPopup(avatarPopup);
 }
 
 function handleEditAvatar(evt) {
@@ -30,9 +29,8 @@ function handleEditAvatar(evt) {
         avatarImage.src = res.avatar;
         evt.target.reset();
         setDisabledButton(avatarPopup);
-        const closePopup = new Popup(avatarPopup);
+        const closePopup = new Popup('[data-editAvatar]');
         closePopup.closePopup();
-        // closePopup(avatarPopup);
     })
         .catch(err => {
             console.log(err);
