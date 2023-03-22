@@ -33,3 +33,5 @@
 
 https://romanchernikov.github.io/mesto-project/
 
+Почта: Karpukhin.A21@yandex.ru
+Git: https://github.com/AntonKarpukhin

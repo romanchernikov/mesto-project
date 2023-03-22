@@ -13,4 +13,5 @@ export class UserInfo {
         this._name.textContent = this.getUserInfo().name;
         this._info.textContent = this.getUserInfo().about;
     }
+
 }

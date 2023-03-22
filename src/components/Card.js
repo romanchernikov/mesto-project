@@ -1,33 +1,22 @@
-import { closePopup, openPopup } from "./utils";
-import { myId } from "./script";
-import { setDisabledButton } from "./validate";
-import {
-    buttonAddSubmit,
-    elementsContainer,
-    elementTemplate,
-    linkCardAdd,
-    nameCardAdd,
-    popupAddCard,
-    popupZoomImage,
-    zoomImage,
-    zoomImageText
-} from "./constant";
-import { Api } from "../components/Api";
-import { Popup } from "../components/Popup";
-import { PopupWithImage } from "../components/PopupWithImage";
+import { myId } from "../js/script";
 
 export class Card {
-    constructor(nameValue, srcValue, likes, ownerId, cardId, myId) {
+    constructor( { nameValue, srcValue, likes, ownerId, cardId, myId, template, handleCardClick, addLike, deleteLike, deleteCard }) {
         this._name = nameValue;
         this._srcValue = srcValue;
         this._likes = likes;
         this._ownerId = ownerId;
         this._cardId = cardId;
         this._myId = myId;
+        this._template = document.querySelector(template).content;
+        this._handleCardClick = handleCardClick;
+        this._addLike = addLike;
+        this._deleteLike = deleteLike;
+        this._deleteCard = deleteCard;
     }
 
     _getElement() {
-        return elementTemplate.querySelector('.element').cloneNode(true);
+        return this._template.querySelector('.element').cloneNode(true);
     }
 
     generate() {
@@ -69,8 +58,7 @@ export class Card {
 
     _checkLikes(evt) {
         if (!evt.target.classList.contains('element__rating-icon_active')) {
-            const addLike = new Api(`/cards/likes/${this._cardId}`, 'PUT');
-            addLike.response().then(res => {
+            this._addLike(this._cardId).then(res => {
                 this._ratingIcon.classList.add('element__rating-icon_active');
                 this._likesCounter.textContent = res.likes.length;
             })
@@ -78,8 +66,7 @@ export class Card {
                     console.log(err);
                 });
         } else {
-            const delLike = new Api(`/cards/likes/${this._cardId}`, 'DELETE');
-            delLike.response().then(res => {
+            this._deleteLike(this._cardId).then(res => {
                 this._ratingIcon.classList.remove('element__rating-icon_active');
                 this._likesCounter.textContent = res.likes.length;
             })
@@ -103,8 +90,7 @@ export class Card {
         });
 
         this._deleteIcon.addEventListener('click', evt => {
-            const delCard = new Api(`/cards/${this._cardId}`, 'DELETE');
-            delCard.response().then(() => {
+            this._deleteCard(this._cardId).then(() => {
                 evt.target.closest('.element').remove();
             })
                 .catch(err => {
@@ -113,38 +99,7 @@ export class Card {
         });
 
         this._userImage.addEventListener('click', evt => {
-            const popupImage = new PopupWithImage(popupZoomImage);
-            popupImage.openPopup(evt);
-            popupImage.setEventListeners();
-            // openPopup(popupZoomImage);
+            this._handleCardClick(evt);
         });
     }
 }
-
-function handleAddCardFormSubmit(evt) {
-    evt.preventDefault();
-    console.log('123')
-    // buttonAddSubmit.textContent = 'Сохранение...';
-    // const postCard = new Api('/cards', 'POST', JSON.stringify({
-    //     name: nameCardAdd.value.trim(),
-    //     link: linkCardAdd.value.trim()
-    // }));
-    // return postCard.response().then(element => {
-    //     evt.target.reset();
-    //     setDisabledButton(popupAddCard);
-    //     const closePopup = new Popup(popupAddCard);
-    //     closePopup.closePopup();
-    //     // closePopup(popupAddCard);
-    //     const createCard = new Card(element.name, element.link, element.likes, element.owner._id, element._id, myId);
-    //     const card = createCard.generate();
-    //     elementsContainer.prepend(card);
-    // })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
-    //     .finally(() => {
-    //         buttonAddSubmit.textContent = 'Сохранить';
-    //     });
-}
-
-export { handleAddCardFormSubmit, elementsContainer };
