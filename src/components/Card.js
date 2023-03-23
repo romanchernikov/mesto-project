@@ -1,5 +1,3 @@
-import { myId } from "../js/script";
-
 export class Card {
     constructor( { nameValue, srcValue, likes, ownerId, cardId, myId, template, handleCardClick, addLike, deleteLike, deleteCard }) {
         this._name = nameValue;
@@ -50,29 +48,23 @@ export class Card {
 
     _checkMyLike() {
         this._likes.forEach(element => {
-            if (element._id === myId) {
+            if (element._id === this._myId) {
                 this._ratingIcon.classList.add('element__rating-icon_active');
             }
         });
     }
 
+    toggleLikeCounter(counter) {
+        this._likesCounter.textContent = counter;
+    }
+
     _checkLikes(evt) {
         if (!evt.target.classList.contains('element__rating-icon_active')) {
-            this._addLike(this._cardId).then(res => {
-                this._ratingIcon.classList.add('element__rating-icon_active');
-                this._likesCounter.textContent = res.likes.length;
-            })
-                .catch(err => {
-                    console.log(err);
-                });
+            this._addLike(this._cardId);
+            this._ratingIcon.classList.add('element__rating-icon_active');
         } else {
-            this._deleteLike(this._cardId).then(res => {
-                this._ratingIcon.classList.remove('element__rating-icon_active');
-                this._likesCounter.textContent = res.likes.length;
-            })
-                .catch(err => {
-                    console.log(err);
-                });
+            this._deleteLike(this._cardId);
+            this._ratingIcon.classList.remove('element__rating-icon_active');
         }
     }
 
@@ -90,12 +82,8 @@ export class Card {
         });
 
         this._deleteIcon.addEventListener('click', evt => {
-            this._deleteCard(this._cardId).then(() => {
-                evt.target.closest('.element').remove();
-            })
-                .catch(err => {
-                    console.log(err);
-                });
+            this._deleteCard(this._cardId);
+            evt.target.closest('.element').remove();
         });
 
         this._userImage.addEventListener('click', evt => {
