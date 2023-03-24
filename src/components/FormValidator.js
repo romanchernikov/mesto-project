@@ -53,6 +53,11 @@ export class FormValidator {
         }
     }
 
+    setDisabledButton() {
+        this._buttonElement.classList.add('popup__button-submit_disabled');
+        this._buttonElement.disabled = true;
+    }
+
     _setEventListeners() {
         this._toggleButtonState();
         this._inputList.forEach((inputElement) => {

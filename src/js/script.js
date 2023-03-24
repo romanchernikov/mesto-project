@@ -1,36 +1,32 @@
 import '../../src/pages/index.css';
-import { createCard, setDisabledButton, addAvatarButton, removeAvatarButton } from './utils';
 import {
-    avatarForm,
     buttonSubmitForm,
     buttonSubmitUserInfo,
     buttonAddCard,
-    submitButtonAddCard,
     buttonEditProfile,
     buttonSubmitAvatar,
-    submitButtonEditProfile,
     inputName,
     inputHobby,
     avatarContainer, avatarInput
 } from './constant';
-import { Api } from "../components/Api";
+import { Api} from "../components/Api";
 import { FormValidator } from "../components/FormValidator";
 import { Section } from '../components/Section';
 import { PopupWithForm } from "../components/PopupWithForm";
 import { UserInfo } from "../components/UserInfo";
 import { PopupWithImage } from "../components/PopupWithImage";
+import { Card } from "../components/Card";
 
 
 //Создание экземпляров классов Апи, Секция, ПопапаКартинки.
 export let myId;
 
-export const getApiResponse = (url, method, endpoint) => new Api(url, method, endpoint);
+export const getApiResponse =  new Api();
 
-const sectionRender = (cards) => new Section({
-    items: cards,
+const sectionRender =  new Section({
     renderer: (element) => {
         const card = createCard(element);
-        sectionRender(cards).addItem(card);
+        sectionRender.addCard(card);
     }
 }, '.elements');
 
@@ -46,12 +42,11 @@ const userInfo = new UserInfo({
     }
 );
 
-
 //Получение и отрисовка карточек и профиля пользователя.
-Promise.all([getApiResponse('/users/me').response(), getApiResponse('/cards').response()])
+Promise.all([getApiResponse.response('/users/me'), getApiResponse.response('/cards')])
     .then(([userData, cards]) => {
         myId = userData._id;
-        sectionRender(cards).renderer();
+        sectionRender.rendererCards(cards);
         userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
     })
     .catch(err => {
@@ -69,22 +64,23 @@ const enableValidationAddCard = new FormValidator(
         errorClass: 'popup__input-error_active'
     },
     '[data-addCard]');
+enableValidationAddCard.enableValidation();
 
 const addCardForm = new PopupWithForm({
     selector: '[data-addCard]',
     submitForm: ({name, link}) => {
         buttonSubmitForm.textContent = 'Сохранение...';
-        getApiResponse('/cards', 'POST', JSON.stringify({
+        getApiResponse.response('/cards', 'POST', JSON.stringify({
             name: name,
             link: link
-        })).response()
+        }))
             .then(element => {
-            setDisabledButton(document.querySelector('[data-addCard]'));
-            sectionRender(Array(element)).renderer();
-            addCardForm.closePopup();
-        }).catch(err => {
+                enableValidationAddCard.setDisabledButton();
+                sectionRender.rendererCard(element);
+                addCardForm.closePopup();
+            }).catch(err => {
             console.log(err);
-        })
+            })
             .finally(() => {
                 buttonSubmitForm.textContent = 'Сохранить';
             });
@@ -94,11 +90,6 @@ addCardForm.setEventListeners();
 
 buttonAddCard.addEventListener('click',  () => {
     addCardForm.openPopup();
-    enableValidationAddCard.enableValidation();
-});
-
-submitButtonAddCard.addEventListener('submit', (evt) => {
-    evt.preventDefault();
 });
 
 
@@ -112,17 +103,18 @@ const enableValidationEditProfile = new FormValidator(
         errorClass: 'popup__input-error_active'
     },
     '[data-editForm]');
+enableValidationEditProfile.enableValidation();
 
 const editProfile = new PopupWithForm({
    selector: '[data-editForm]',
    submitForm: ({name, about}) => {
        buttonSubmitUserInfo.textContent = 'Сохранение...';
-       getApiResponse(`/users/me`, 'PATCH', JSON.stringify({
+       getApiResponse.response(`/users/me`, 'PATCH', JSON.stringify({
            name: name,
            about: about
-       })).response()
+       }))
            .then(dataUser=> {
-               setDisabledButton(document.querySelector('[data-editForm]'));
+               enableValidationEditProfile.setDisabledButton();
                userInfo.setUserInfo(dataUser.name, dataUser.about);
                editProfile.closePopup();
            })
@@ -138,15 +130,10 @@ editProfile.setEventListeners();
 
 buttonEditProfile.addEventListener('click', function () {
     editProfile.openPopup();
-    enableValidationEditProfile.enableValidation();
 
     const {name, about} = userInfo.getUserInfo();
     inputName.value = name;
     inputHobby.value = about;
-});
-
-submitButtonEditProfile.addEventListener('submit', (evt) => {
-    evt.preventDefault();
 });
 
 
@@ -160,16 +147,17 @@ const enableValidationAvatarEdit = new FormValidator(
         errorClass: 'popup__input-error_active'
     },
     '[data-editAvatar]');
+enableValidationAvatarEdit.enableValidation();
 
 const avatarEditForm = new PopupWithForm({
     selector: '[data-editAvatar]',
     submitForm: () => {
         buttonSubmitAvatar.textContent = 'Сохранение...';
-        getApiResponse('/users/me/avatar', 'PATCH', JSON.stringify({
+        getApiResponse.response('/users/me/avatar', 'PATCH', JSON.stringify({
             avatar: avatarInput.value
-        })).response()
+        }))
             .then(element => {
-                setDisabledButton(document.querySelector('[data-editAvatar]'));
+                enableValidationAvatarEdit.setDisabledButton();
                 userInfo.setUserInfo(element.name, element.about, element.avatar);
                 avatarEditForm.closePopup();
             })
@@ -185,12 +173,51 @@ avatarEditForm.setEventListeners();
 
 avatarContainer.addEventListener('click', () => {
     avatarEditForm.openPopup();
-    enableValidationAvatarEdit.enableValidation();
 });
 
-avatarForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-});
-
-avatarContainer.addEventListener('mouseover', addAvatarButton);
-avatarContainer.addEventListener('mouseout', removeAvatarButton);
+//Создание экземпляра карточки
+function createCard(element) {
+    const createCard = new Card({
+        nameValue: element.name,
+        srcValue: element.link,
+        likes: element.likes,
+        ownerId: element.owner._id,
+        cardId: element._id,
+        myId: myId,
+        template: '#element__template',
+        handleCardClick: () => {
+            openPopupBigImg.openPopup(element.name, element.link);
+        },
+        addLike: (cardId) => {
+            getApiResponse.response(`/cards/likes/${cardId}`, 'PUT')
+                .then(res => {
+                    createCard.toggleLikeCounter(res.likes.length);
+                    createCard.renderAddLike();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        deleteLike: (cardId) => {
+            return getApiResponse.response(`/cards/likes/${cardId}`, 'DELETE')
+                .then(res => {
+                    createCard.toggleLikeCounter(res.likes.length);
+                    createCard.renderDeleteLike();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        deleteCard: (cardId) => {
+            getApiResponse.response(`/cards/${cardId}`, 'DELETE')
+                .then((res) => {
+                    createCard.deleteCard();
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    });
+    return createCard.generate();
+}

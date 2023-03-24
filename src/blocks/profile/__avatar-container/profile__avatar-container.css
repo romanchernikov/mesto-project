@@ -3,4 +3,9 @@
     width: 120px;
     height: 120px;
     position: relative;
+    cursor: pointer;
+}
+
+.profile__avatar-container:hover .profile__avatar-edit {
+    visibility: visible;
 }

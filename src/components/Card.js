@@ -58,14 +58,20 @@ export class Card {
         this._likesCounter.textContent = counter;
     }
 
-    _checkLikes(evt) {
-        if (!evt.target.classList.contains('element__rating-icon_active')) {
+    _checkLikes() {
+        if (!this._ratingIcon.classList.contains('element__rating-icon_active')) {
             this._addLike(this._cardId);
-            this._ratingIcon.classList.add('element__rating-icon_active');
         } else {
             this._deleteLike(this._cardId);
-            this._ratingIcon.classList.remove('element__rating-icon_active');
         }
+    }
+
+    renderAddLike() {
+        this._ratingIcon.classList.add('element__rating-icon_active');
+    }
+
+    renderDeleteLike() {
+        this._ratingIcon.classList.remove('element__rating-icon_active');
     }
 
     //удаление
@@ -75,15 +81,18 @@ export class Card {
         }
     }
 
+    deleteCard() {
+        this._element.remove();
+    }
+
     //обработчики
     _setEventListener() {
-        this._ratingIcon.addEventListener('click', (evt) => {
-            this._checkLikes(evt);
+        this._ratingIcon.addEventListener('click', () => {
+            this._checkLikes();
         });
 
-        this._deleteIcon.addEventListener('click', evt => {
+        this._deleteIcon.addEventListener('click', () => {
             this._deleteCard(this._cardId);
-            evt.target.closest('.element').remove();
         });
 
         this._userImage.addEventListener('click', evt => {
