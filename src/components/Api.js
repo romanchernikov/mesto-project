@@ -1,15 +1,12 @@
 export class Api {
-    constructor(url, method, endpoint) {
+    constructor() {
         this.config = {
             baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
             headers: {
                 authorization: 'fce8e61d-eaab-4977-ae1a-12e2aebdd94c',
                 'Content-Type': 'application/json'
-            },
-            method: method,
-            body: endpoint,
+            }
         };
-        this.url = url;
     }
 
     _checkResponse(res) {
@@ -20,7 +17,7 @@ export class Api {
         }
     }
 
-    response() {
-        return fetch(`${this.config.baseUrl}${this.url}`, this.config).then(this._checkResponse);
+    response(url, method, endpoint) {
+        return fetch(`${this.config.baseUrl}${url}`, {method: method, body: endpoint, headers: this.config.headers}).then(this._checkResponse);
     }
 }

@@ -1,5 +1,3 @@
-import { myId } from "../js/script";
-
 export class Card {
     constructor( { nameValue, srcValue, likes, ownerId, cardId, myId, template, handleCardClick, addLike, deleteLike, deleteCard }) {
         this._name = nameValue;
@@ -50,30 +48,30 @@ export class Card {
 
     _checkMyLike() {
         this._likes.forEach(element => {
-            if (element._id === myId) {
+            if (element._id === this._myId) {
                 this._ratingIcon.classList.add('element__rating-icon_active');
             }
         });
     }
 
-    _checkLikes(evt) {
-        if (!evt.target.classList.contains('element__rating-icon_active')) {
-            this._addLike(this._cardId).then(res => {
-                this._ratingIcon.classList.add('element__rating-icon_active');
-                this._likesCounter.textContent = res.likes.length;
-            })
-                .catch(err => {
-                    console.log(err);
-                });
+    toggleLikeCounter(counter) {
+        this._likesCounter.textContent = counter;
+    }
+
+    _checkLikes() {
+        if (!this._ratingIcon.classList.contains('element__rating-icon_active')) {
+            this._addLike(this._cardId);
         } else {
-            this._deleteLike(this._cardId).then(res => {
-                this._ratingIcon.classList.remove('element__rating-icon_active');
-                this._likesCounter.textContent = res.likes.length;
-            })
-                .catch(err => {
-                    console.log(err);
-                });
+            this._deleteLike(this._cardId);
         }
+    }
+
+    renderAddLike() {
+        this._ratingIcon.classList.add('element__rating-icon_active');
+    }
+
+    renderDeleteLike() {
+        this._ratingIcon.classList.remove('element__rating-icon_active');
     }
 
     //удаление
@@ -83,19 +81,18 @@ export class Card {
         }
     }
 
+    deleteCard() {
+        this._element.remove();
+    }
+
     //обработчики
     _setEventListener() {
-        this._ratingIcon.addEventListener('click', (evt) => {
-            this._checkLikes(evt);
+        this._ratingIcon.addEventListener('click', () => {
+            this._checkLikes();
         });
 
-        this._deleteIcon.addEventListener('click', evt => {
-            this._deleteCard(this._cardId).then(() => {
-                evt.target.closest('.element').remove();
-            })
-                .catch(err => {
-                    console.log(err);
-                });
+        this._deleteIcon.addEventListener('click', () => {
+            this._deleteCard(this._cardId);
         });
 
         this._userImage.addEventListener('click', evt => {
