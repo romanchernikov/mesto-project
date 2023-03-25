@@ -22,12 +22,7 @@ export class PopupWithForm extends Popup {
 
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-        });
-
-        this._element.addEventListener('mousedown', (evt) => {
-            if (evt.target.classList.contains('popup__button-submit')) {
-                this._submitForm(this._getInputValues());
-            }
+            this._submitForm(this._getInputValues());
         });
     }
 

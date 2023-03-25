@@ -1,6 +1,7 @@
 export class Section {
-    constructor({ renderer }, selector) {
+    constructor({ renderer, rendererOneCard }, selector) {
         this._renderer = renderer;
+        this._rendererOneCard = rendererOneCard;
         this._container = document.querySelector(selector);
     }
 
@@ -11,7 +12,11 @@ export class Section {
     }
 
     rendererCard(card) {
-        this._renderer(card);
+        this._rendererOneCard(card);
+    }
+
+    addInitialCards(element) {
+        this._container.append(element);
     }
 
     addCard(element) {

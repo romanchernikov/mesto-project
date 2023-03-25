@@ -26,8 +26,12 @@ export const getApiResponse =  new Api();
 const sectionRender =  new Section({
     renderer: (element) => {
         const card = createCard(element);
+        sectionRender.addInitialCards(card);
+    },
+    rendererOneCard: (element) => {
+        const card = createCard(element);
         sectionRender.addCard(card);
-    }
+    },
 }, '.elements');
 
 export const openPopupBigImg = new PopupWithImage('[data-zoomImage]');
@@ -151,10 +155,10 @@ enableValidationAvatarEdit.enableValidation();
 
 const avatarEditForm = new PopupWithForm({
     selector: '[data-editAvatar]',
-    submitForm: () => {
+    submitForm: ( { avatar }) => {
         buttonSubmitAvatar.textContent = 'Сохранение...';
         getApiResponse.response('/users/me/avatar', 'PATCH', JSON.stringify({
-            avatar: avatarInput.value
+            avatar: avatar
         }))
             .then(element => {
                 enableValidationAvatarEdit.setDisabledButton();
@@ -177,7 +181,7 @@ avatarContainer.addEventListener('click', () => {
 
 //Создание экземпляра карточки
 function createCard(element) {
-    const createCard = new Card({
+    const card = new Card({
         nameValue: element.name,
         srcValue: element.link,
         likes: element.likes,
@@ -191,8 +195,8 @@ function createCard(element) {
         addLike: (cardId) => {
             getApiResponse.response(`/cards/likes/${cardId}`, 'PUT')
                 .then(res => {
-                    createCard.toggleLikeCounter(res.likes.length);
-                    createCard.renderAddLike();
+                    card.toggleLikeCounter(res.likes.length);
+                    card.renderAddLike();
                 })
                 .catch(err => {
                     console.log(err);
@@ -201,8 +205,8 @@ function createCard(element) {
         deleteLike: (cardId) => {
             return getApiResponse.response(`/cards/likes/${cardId}`, 'DELETE')
                 .then(res => {
-                    createCard.toggleLikeCounter(res.likes.length);
-                    createCard.renderDeleteLike();
+                    card.toggleLikeCounter(res.likes.length);
+                    card.renderDeleteLike();
                 })
                 .catch(err => {
                     console.log(err);
@@ -211,13 +215,12 @@ function createCard(element) {
         deleteCard: (cardId) => {
             getApiResponse.response(`/cards/${cardId}`, 'DELETE')
                 .then((res) => {
-                    createCard.deleteCard();
-                    console.log(res);
+                    card.deleteCard();
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
     });
-    return createCard.generate();
+    return card.generate();
 }
